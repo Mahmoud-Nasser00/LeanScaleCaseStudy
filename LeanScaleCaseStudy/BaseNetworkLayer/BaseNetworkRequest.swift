@@ -9,22 +9,19 @@ import Foundation
 import Alamofire
 import UIKit
 
-class BaseNetworkRequest<T:TargetType> {
+class BaseNetworkRequest<T: TargetType> {
     
-    typealias networkResultCompletion<M: Decodable> = (Result<M?, NSError>) -> Void
+    typealias NetworkResultCompletion<M: Decodable> = (Result<M?, NSError>) -> Void
+    typealias NetworkCompletionError = (NSError) -> Void
+    typealias DecodingCompletion<M: Codable> = (_ response: M?, _ error: NSError?) -> Void
+    typealias UnAuthorizedCompletion = (NSError) -> Void
     
-    typealias networkCompletionError = (NSError) -> Void
-    
-    typealias decodingCompletion<M:Codable> = (_ response: M?, _ error:NSError?) -> Void
-    
-    typealias unAuthorizedCompletion = (NSError) -> Void
-    
-    func fetchData<M: Codable>(target: T, object:M.Type, snakeCase:Int = 0, completion: @escaping networkResultCompletion<M>){
+    func fetchData<M: Codable>(target: T, object:M.Type, snakeCase:Int = 0, completion: @escaping NetworkResultCompletion<M>) {
         
         let method = Alamofire.HTTPMethod(rawValue: target.HTTPMethod.rawValue)
         let headers = Alamofire.HTTPHeaders(target.headers ?? [:])
         let params = buildParams(task: target.task)
-      
+        
         AF.request(target.baseUrl + target.path, method: method, parameters: params.params, encoding: params.encodingType, headers: headers) {
             $0.timeoutInterval = 15
         }.response { [weak self] response in
@@ -33,13 +30,13 @@ class BaseNetworkRequest<T:TargetType> {
             print("url is -----------:> \(target.baseUrl)\(target.path)")
             print("parameters is -----------:> \(params)")
             print("headers:-----------:>\(headers)")
-
+            
             guard response.error == nil else {
                 completion(.failure(response.error! as NSError))
                 return
             }
             
-            self?.handleUrlStatusCode(responseData: response.data,code: response.response?.statusCode){ isSuccess,error  in
+            self?.handleUrlStatusCode(responseData: response.data,code: response.response?.statusCode) { isSuccess,error  in
                 
                 guard isSuccess else {
                     if error == "Unaunthenticated" {
@@ -71,7 +68,7 @@ class BaseNetworkRequest<T:TargetType> {
     }
     
     private func buildParams(task:TaskType)->(params:[String:Any],encodingType:ParameterEncoding) {
-        switch task{
+        switch task {
         case .plainRequest:
             return ([:],URLEncoding.default)
             
@@ -80,7 +77,7 @@ class BaseNetworkRequest<T:TargetType> {
         }
     }
     
-    private func handleUrlStatusCode(responseData:Data?,code:Int?, completion:@escaping(Bool,String?)->Void){
+    private func handleUrlStatusCode(responseData:Data?,code:Int?, completion:@escaping(Bool,String?) -> Void) {
         
         guard let statusCode = code else {
             print("There is no status code")
@@ -92,15 +89,14 @@ class BaseNetworkRequest<T:TargetType> {
         case 200:
             completion(true,nil)
         case 401:
-            //not Authorized
+            // Not Authorized
             guard let data = responseData else {
                 completion(false, "\(code!) \(NetworkErrorMessage.badUrl)")
                 return
             }
-            decode(fromData: data, toObject: BaseNetworkResponseErrorModel.self) { result, error in
-                completion(false,result?.message)
+            decode(fromData: data, toObject: BaseNetworkResponseErrorModel.self) { result, _ in
+                completion(false, result?.message)
             }
-            
             
         case 403:
             completion(true,nil)
@@ -110,19 +106,19 @@ class BaseNetworkRequest<T:TargetType> {
                 completion(false, "\(code!) \(NetworkErrorMessage.badUrl)")
                 return
             }
-            decode(fromData: data, toObject: BaseNetworkResponseErrorModel.self) { result, error in
-                completion(false,result?.message)
+            decode(fromData: data, toObject: BaseNetworkResponseErrorModel.self) { result, _ in
+                completion(false, result?.message)
             }
             
         case 500:
             completion(false, "\(code ?? 500) \(NetworkErrorMessage.badServerResponse)")
-        
+            
         default:
             completion(false, "\(code ?? -1) \(NetworkErrorMessage.badServerResponse)")
         }
     }
     
-    private func handleUrlError(_ target:T, error:Error?,completion:@escaping networkCompletionError){
+    private func handleUrlError(_ target:T, error:Error?,completion: @escaping NetworkCompletionError) {
         guard let error = error as? URLError else {
             print("there is url error")
             let error = NSError(domain: target.baseUrl, code: 0, userInfo: [NSLocalizedDescriptionKey: NetworkErrorMessage.noInternetConnection])
@@ -162,12 +158,10 @@ class BaseNetworkRequest<T:TargetType> {
             return
         }
         
-        
     }
     
-    private func decode<M:Codable>(fromData data:Data,
-                                   toObject object: M.Type,snakeCase:Int = 0, completion:@escaping decodingCompletion<M>){
-        
+    private func decode<M:Codable>(fromData data: Data,
+                                   toObject object: M.Type, snakeCase: Int = 0, completion: @escaping DecodingCompletion<M>) {
         let decoder = JSONDecoder()
         snakeCase == 0 ? (decoder.keyDecodingStrategy = .convertFromSnakeCase) : ()
         do {
@@ -178,8 +172,5 @@ class BaseNetworkRequest<T:TargetType> {
             let decodingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : NetworkErrorMessage.decodingError])
             completion(nil,decodingError)
         }
-        
     }
-    
 }
-

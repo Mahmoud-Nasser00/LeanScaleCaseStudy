@@ -20,7 +20,7 @@ enum TaskType {
     case parametersRequest(parameter:[String:Any],encoding:ParameterEncoding)
 }
 
-protocol TargetType{
+protocol TargetType {
     var baseUrl: String { get }
     var path: String { get }
     var headers: [String:String]? { get }

@@ -8,20 +8,19 @@
 import Foundation
 
 class NetworkingConstants {
-    
     static let baseUrl =  BuildConfiguration.shared.baseUrl
     
     static func headers() -> [String:String] {
         return
             [
                 "Content-Type": "application/json",
-                "Accept": "application/json",
+                "Accept": "application/json"
         ]
     }
     
     static func createParamsDict(dict:[String:Any?])-> [String:Any] {
         var paramsDict = [String:Any]()
-        let _ = dict.map { key,value in
+        _ = dict.map { key, value in
             if value != nil {
                 paramsDict[key] = value
             }
