@@ -50,6 +50,14 @@ class MoviesVC: UIViewController {
         }
     }
 
+    // MARK: - Navigation
+    private func pushToMovieDetailsVC(movieId id: Int) {
+        if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as? MovieDetailsVC {
+            detailsVC.movieId = id
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
+    }
+
 }
 
 // MARK: - Extensions
@@ -75,4 +83,11 @@ extension MoviesVC: UITableViewDelegate {
             fetchMovies(page: currentPage)
         }
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieId = moviesList[indexPath.row].id
+        pushToMovieDetailsVC(movieId: movieId)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 }

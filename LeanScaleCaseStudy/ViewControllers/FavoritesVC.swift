@@ -30,18 +30,16 @@ class FavoritesVC: UIViewController {
     }
 
     private func handleEmptyState(favs: [MovieResult]) {
-        favoritesTV.tableFooterView?.isHidden = favs.count == 0
+        favoritesTV.tableFooterView?.isHidden = favs.isEmpty
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func pushToMovieDetailsVC(movieId id: Int) {
+        if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as? MovieDetailsVC {
+            detailsVC.movieId = id
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
     }
-    */
 
 }
 
@@ -63,5 +61,11 @@ extension FavoritesVC: UITableViewDataSource {
 
 extension FavoritesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieId = favoritesList[indexPath.row].id
+        pushToMovieDetailsVC(movieId: movieId)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
