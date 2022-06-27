@@ -9,6 +9,19 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>LeanScaleCaseStudyDev.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6F50066E28685BAC00D1AA88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
