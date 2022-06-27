@@ -15,6 +15,14 @@ class MovieDetailsVC: UIViewController {
 
     // MARK: - Props
 
+    private lazy var favoriteBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Favorite", for: .normal)
+        btn.setTitle("Favorited", for: .selected)
+        btn.addTarget(self, action: #selector(favoriteBtnTapped), for: .touchUpInside)
+        return btn
+    }()
+
     private lazy var detailsItems = DetailsItems.allCases
     private var movieDetails: MovieDetails?
 
@@ -23,11 +31,17 @@ class MovieDetailsVC: UIViewController {
     // MARK: - App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         setupTV()
         fetchMovieDetails(id: movieId)
     }
 
     // MARK: - UI Functions
+
+    private func setupNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteBtn)
+    }
+
     private func setupTV() {
         movieDetailsTV.delegate = self
         movieDetailsTV.dataSource = self
@@ -67,6 +81,11 @@ class MovieDetailsVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    // MARK: - Actions
+    @objc func favoriteBtnTapped(){
+        favoriteBtn.isSelected = !favoriteBtn.isSelected
+    }
 
 }
 // MARK: - Extensions
