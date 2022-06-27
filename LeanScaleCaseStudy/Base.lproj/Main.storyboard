@@ -11,7 +11,7 @@
         <!--Games-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LeanScaleCaseStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MoviesVC" customModule="LeanScaleCaseStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,14 +42,48 @@
         <!--Favourites-->
         <scene sceneID="Rna-2W-03w">
             <objects>
-                <viewController id="h6F-Ok-RDc" sceneMemberID="viewController">
+                <viewController id="h6F-Ok-RDc" customClass="FavoritesVC" customModule="LeanScaleCaseStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ugm-Wh-gbr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mBC-z4-Yf2">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="i0r-gA-dKX" userLabel="FooterView">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no favourites found." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytn-Mb-6cI">
+                                            <rect key="frame" x="20" y="20" width="374" height="59"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ytn-Mb-6cI" secondAttribute="trailing" constant="20" id="GN9-Bu-WeA"/>
+                                        <constraint firstItem="ytn-Mb-6cI" firstAttribute="top" secondItem="i0r-gA-dKX" secondAttribute="top" constant="20" id="ZDq-kk-jhv"/>
+                                        <constraint firstItem="ytn-Mb-6cI" firstAttribute="leading" secondItem="i0r-gA-dKX" secondAttribute="leading" constant="20" id="bxX-GP-A7l"/>
+                                        <constraint firstAttribute="bottom" secondItem="ytn-Mb-6cI" secondAttribute="bottom" constant="20" id="zjC-yN-ovQ"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="jhl-GI-AiN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jhl-GI-AiN" firstAttribute="trailing" secondItem="mBC-z4-Yf2" secondAttribute="trailing" id="Khf-ma-bgm"/>
+                            <constraint firstItem="mBC-z4-Yf2" firstAttribute="top" secondItem="jhl-GI-AiN" secondAttribute="top" id="WBQ-YX-mcw"/>
+                            <constraint firstItem="mBC-z4-Yf2" firstAttribute="leading" secondItem="jhl-GI-AiN" secondAttribute="leading" id="c4u-Sv-t94"/>
+                            <constraint firstAttribute="bottom" secondItem="mBC-z4-Yf2" secondAttribute="bottom" id="e2C-3R-5Xg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favourites" id="n5r-Ia-Hba"/>
+                    <connections>
+                        <outlet property="favoritesTV" destination="mBC-z4-Yf2" id="7g1-Gj-j94"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ld-ko-cuV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,6 +95,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="AD7-co-Xal" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p1F-Ev-St1">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

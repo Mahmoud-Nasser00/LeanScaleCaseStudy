@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MoviesVC: UIViewController {
 
     @IBOutlet weak var moviesTV: UITableView!
 
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - Extensions
-extension ViewController: UITableViewDataSource {
+extension MoviesVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesList.count
     }
@@ -68,7 +68,7 @@ extension ViewController: UITableViewDataSource {
 
 }
 
-extension ViewController: UITableViewDelegate {
+extension MoviesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == moviesList.count - 1 && totalCount != moviesList.count {
             currentPage += 1
