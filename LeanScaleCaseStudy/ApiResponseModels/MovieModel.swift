@@ -41,80 +41,12 @@ struct Movie: Codable {
 // MARK: - Result
 struct MovieResult: Codable {
     let id: Int
-    let slug, name, released: String
-    let tba: Bool
-    let backgroundImage: String
-    let rating: Double
-    let ratingTop: Int
-    let ratings: [Rating]
-    let ratingsCount, reviewsTextCount, added: Int
-    let addedByStatus: AddedByStatus
-    let metacritic, playtime, suggestionsCount: Int?
-    let updated: String
-//    let userGame: JSONNull?
-    let reviewsCount: Int
-    let saturatedColor, dominantColor: Color
-//    let platforms: [PlatformElement]
-//    let parentPlatforms: [ParentPlatform]
+    let name, backgroundImage: String
+    let metacritic: Int
     let genres: [Genre]
-//    let stores: [Store]
-//    let clip: JSONNull?
-//    let tags: [Genre]
-//    let esrbRating: EsrbRating
-    let shortScreenshots: [ShortScreenshot]
-}
-
-struct AddedByStatus: Codable {
-    let yet, owned, beaten, toplay: Int
-    let dropped, playing: Int
-}
-
-enum Color: String, Codable {
-    case the0F0F0F = "0f0f0f"
-}
-
-struct EsrbRating: Codable {
-    let id: Int
-    let name, slug: String
 }
 
 struct Genre: Codable {
     let id: Int
-    let name, slug: String
-    let gamesCount: Int
-    let imageBackground: String
-    let domain: String?
-    let language: Language?
-}
-
-enum Language: String, Codable {
-    case eng
-}
-
-struct ParentPlatform: Codable {
-    let platform: EsrbRating
-}
-
-struct Rating: Codable {
-    let id: Int
-    let title: Title
-    let count: Int
-    let percent: Double
-}
-
-enum Title: String, Codable {
-    case exceptional
-    case meh
-    case recommended
-    case skip
-}
-
-struct ShortScreenshot: Codable {
-    let id: Int
-    let image: String
-}
-
-struct Store: Codable {
-    let id: Int
-    let store: Genre
+    let name: String
 }

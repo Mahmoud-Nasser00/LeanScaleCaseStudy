@@ -22,8 +22,8 @@ class MovieDescCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func updateDesc(movie: MovieResult) {
-        movieDesc.text = movie.tba.description
+    func updateDesc(desc: String) {
+        movieDesc.attributedText = desc.htmlToAttributedString
     }
     
 }
