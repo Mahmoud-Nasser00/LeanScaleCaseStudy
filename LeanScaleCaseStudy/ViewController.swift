@@ -11,6 +11,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        fetchMovies(page: 1)
     }
+
+    private func fetchMovies(page: Int) {
+        FetchMoviesApi.shared.fetchMovies(page: page) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let model):
+                print(model)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
 }

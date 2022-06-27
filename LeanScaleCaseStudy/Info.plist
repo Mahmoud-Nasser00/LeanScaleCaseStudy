@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+    <key>Configuration</key>
+    <string>$(CONFIGURATION)</string>
 </dict>
 </plist>

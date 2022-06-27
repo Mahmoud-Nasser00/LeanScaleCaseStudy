@@ -13,6 +13,8 @@
 		6F50067A28685BAC00D1AA88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F50067828685BAC00D1AA88 /* Main.storyboard */; };
 		6F50067C28685BB100D1AA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F50067B28685BB100D1AA88 /* Assets.xcassets */; };
 		6F50067F28685BB100D1AA88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F50067D28685BB100D1AA88 /* LaunchScreen.storyboard */; };
+		6F69430C286A3B6B007A536B /* FetchMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F69430B286A3B6B007A536B /* FetchMoviesUseCase.swift */; };
+		6F69430F286A3D1B007A536B /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F69430E286A3D1B007A536B /* MovieModel.swift */; };
 		6FBABF3F286867A600120AD3 /* BaseNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBABF38286867A600120AD3 /* BaseNetworkError.swift */; };
 		6FBABF40286867A600120AD3 /* ApiDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBABF39286867A600120AD3 /* ApiDecoder.swift */; };
 		6FBABF41286867A600120AD3 /* NetworkContants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBABF3A286867A600120AD3 /* NetworkContants.swift */; };
@@ -36,6 +38,8 @@
 		6F50067B28685BB100D1AA88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F50067E28685BB100D1AA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F50068028685BB100D1AA88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F69430B286A3B6B007A536B /* FetchMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMoviesUseCase.swift; sourceTree = "<group>"; };
+		6F69430E286A3D1B007A536B /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		6FBABF38286867A600120AD3 /* BaseNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNetworkError.swift; sourceTree = "<group>"; };
 		6FBABF39286867A600120AD3 /* ApiDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDecoder.swift; sourceTree = "<group>"; };
 		6FBABF3A286867A600120AD3 /* NetworkContants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkContants.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				6FBABF962868684500120AD3 /* Resources */,
 				6FBABF6E2868683F00120AD3 /* Managers */,
 				6FBABF37286867A600120AD3 /* BaseNetworkLayer */,
+				6F69430D286A3CFD007A536B /* ApiResponseModels */,
+				6F69430A286A3B50007A536B /* UseCases */,
 				6F50067228685BAC00D1AA88 /* AppDelegate.swift */,
 				6F50067428685BAC00D1AA88 /* SceneDelegate.swift */,
 				6F50067628685BAC00D1AA88 /* ViewController.swift */,
@@ -108,6 +114,22 @@
 				6F50068028685BB100D1AA88 /* Info.plist */,
 			);
 			path = LeanScaleCaseStudy;
+			sourceTree = "<group>";
+		};
+		6F69430A286A3B50007A536B /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				6F69430B286A3B6B007A536B /* FetchMoviesUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		6F69430D286A3CFD007A536B /* ApiResponseModels */ = {
+			isa = PBXGroup;
+			children = (
+				6F69430E286A3D1B007A536B /* MovieModel.swift */,
+			);
+			path = ApiResponseModels;
 			sourceTree = "<group>";
 		};
 		6FBABF37286867A600120AD3 /* BaseNetworkLayer */ = {
@@ -294,6 +316,8 @@
 				6FBABF3F286867A600120AD3 /* BaseNetworkError.swift in Sources */,
 				6FBABFB02868684500120AD3 /* ColorDesignSystem.swift in Sources */,
 				6F50067728685BAC00D1AA88 /* ViewController.swift in Sources */,
+				6F69430C286A3B6B007A536B /* FetchMoviesUseCase.swift in Sources */,
+				6F69430F286A3D1B007A536B /* MovieModel.swift in Sources */,
 				6FBABF41286867A600120AD3 /* NetworkContants.swift in Sources */,
 				6F50067328685BAC00D1AA88 /* AppDelegate.swift in Sources */,
 				6FBABF40286867A600120AD3 /* ApiDecoder.swift in Sources */,

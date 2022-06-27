@@ -7,16 +7,14 @@
 
 import Foundation
 
-struct BaseNetworkResponseModel<T:Codable>: Codable {
-    var status:Bool?
-    var message:String?
-    var data:T?
-    let count:Int?
-    let specialityId: Int?
-
+struct BaseNetworkResponseModel<T: Codable>: Codable {
+    var results: T?
+    var next: String?
+    var previos: String?
+    let count: Int
 }
 
 struct BaseNetworkResponseErrorModel: Codable {
     var message: String?
-    var status:Bool?
+    var status: Bool?
 }
