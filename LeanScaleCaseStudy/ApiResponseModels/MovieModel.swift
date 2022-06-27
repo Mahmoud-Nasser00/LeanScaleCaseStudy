@@ -42,7 +42,7 @@ struct Movie: Codable {
 struct MovieResult: Codable {
     let id: Int
     let name, backgroundImage: String
-    let metacritic: Int
+    let metacritic: Int?
     let genres: [Genre]
 }
 

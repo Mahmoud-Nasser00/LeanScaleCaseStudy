@@ -12,16 +12,28 @@ class FavoritesVC: UIViewController {
     @IBOutlet weak var favoritesTV: UITableView!
 
     // MARK: - props
+    private let searchController = UISearchController()
     private var favoritesList = [MovieResult]()
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTV()
+    }
 
-        // Do any additional setup after loading the view.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupNavBar()
     }
 
     // MARK: - UI Functions
+
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+    }
+
     private func setupTV() {
         favoritesTV.delegate = self
         favoritesTV.dataSource = self
@@ -67,5 +79,11 @@ extension FavoritesVC: UITableViewDelegate {
         let movieId = favoritesList[indexPath.row].id
         pushToMovieDetailsVC(movieId: movieId)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension FavoritesVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }

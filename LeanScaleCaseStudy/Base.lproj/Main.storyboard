@@ -118,10 +118,10 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="46z-Ml-XzT" secondAttribute="bottom" id="LBb-uO-gwP"/>
                                         <constraint firstAttribute="trailing" secondItem="46z-Ml-XzT" secondAttribute="trailing" id="LlL-XI-EH9"/>
+                                        <constraint firstItem="46z-Ml-XzT" firstAttribute="top" secondItem="QNH-bc-7ad" secondAttribute="top" id="MY4-ny-fo0"/>
                                         <constraint firstItem="46z-Ml-XzT" firstAttribute="leading" secondItem="QNH-bc-7ad" secondAttribute="leading" id="NkY-17-LKE"/>
                                         <constraint firstItem="3xG-5N-bnb" firstAttribute="leading" secondItem="QNH-bc-7ad" secondAttribute="leading" constant="16" id="PBD-qe-Xy1"/>
                                         <constraint firstAttribute="bottom" secondItem="3xG-5N-bnb" secondAttribute="bottom" constant="16" id="arc-3l-QA9"/>
-                                        <constraint firstItem="46z-Ml-XzT" firstAttribute="top" secondItem="QNH-bc-7ad" secondAttribute="top" id="nvU-0v-8aB"/>
                                         <constraint firstAttribute="trailing" secondItem="3xG-5N-bnb" secondAttribute="trailing" constant="16" id="pDl-p9-cuf"/>
                                     </constraints>
                                 </view>
@@ -133,8 +133,8 @@
                             <constraint firstItem="AzE-dT-wab" firstAttribute="leading" secondItem="hZH-o3-rIM" secondAttribute="leading" id="2JY-TF-cZQ"/>
                             <constraint firstAttribute="bottom" secondItem="AzE-dT-wab" secondAttribute="bottom" id="EPf-sc-S4B"/>
                             <constraint firstItem="AzE-dT-wab" firstAttribute="trailing" secondItem="hZH-o3-rIM" secondAttribute="trailing" id="bGX-dj-Ddr"/>
+                            <constraint firstItem="AzE-dT-wab" firstAttribute="top" secondItem="Nyb-sa-XuI" secondAttribute="top" id="gPZ-5v-x2d"/>
                             <constraint firstItem="hZH-o3-rIM" firstAttribute="trailing" secondItem="AzE-dT-wab" secondAttribute="trailing" id="lhi-Kw-ivI"/>
-                            <constraint firstItem="AzE-dT-wab" firstAttribute="top" secondItem="Nyb-sa-XuI" secondAttribute="top" id="ujx-TB-s3X"/>
                         </constraints>
                     </view>
                     <connections>

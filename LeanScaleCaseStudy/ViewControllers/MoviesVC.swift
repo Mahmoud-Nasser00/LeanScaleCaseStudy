@@ -12,6 +12,7 @@ class MoviesVC: UIViewController {
     @IBOutlet weak var moviesTV: UITableView!
 
     // MARK: - props
+    private let searchController = UISearchController()
     private var moviesList = [MovieResult]()
     private var totalCount: Int = 0
     private var currentPage: Int = 1
@@ -23,7 +24,19 @@ class MoviesVC: UIViewController {
         fetchMovies(page: currentPage)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupNavBar()
+    }
+
     // MARK: - UI Functions
+
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+    }
+
     private func setupTV() {
         moviesTV.delegate = self
         moviesTV.dataSource = self
@@ -50,6 +63,18 @@ class MoviesVC: UIViewController {
         }
     }
 
+    private func searchMovies(text: String) {
+        SearchMoviesApi.shared.searchMovies(text: text) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let model):
+                self.moviesList = model?.results ?? []
+                self.moviesTV.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     // MARK: - Navigation
     private func pushToMovieDetailsVC(movieId id: Int) {
         if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as? MovieDetailsVC {
@@ -88,6 +113,15 @@ extension MoviesVC: UITableViewDelegate {
         let movieId = moviesList[indexPath.row].id
         pushToMovieDetailsVC(movieId: movieId)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+}
+
+extension MoviesVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text  = searchController.searchBar.text else { return }
+        guard text.count > 3 else { return }
+        searchMovies(text: text)
     }
 
 }

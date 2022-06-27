@@ -36,6 +36,7 @@
 		6FFDC3F4286A6799002025CA /* MovieDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDC3F3286A6799002025CA /* MovieDetailsUseCase.swift */; };
 		6FFDC3F6286A686E002025CA /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDC3F5286A686E002025CA /* MovieDetailModel.swift */; };
 		6FFDC3F8286A701B002025CA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDC3F7286A701B002025CA /* String+Ext.swift */; };
+		6FFDC3FA286A791F002025CA /* SearchMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDC3F9286A791F002025CA /* SearchMoviesUseCase.swift */; };
 		B5CE09B5BDB869DC4900460E /* Pods_LeanScaleCaseStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D44FE169E2DEBC120CC06F /* Pods_LeanScaleCaseStudy.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		6FFDC3F3286A6799002025CA /* MovieDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsUseCase.swift; sourceTree = "<group>"; };
 		6FFDC3F5286A686E002025CA /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
 		6FFDC3F7286A701B002025CA /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		6FFDC3F9286A791F002025CA /* SearchMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				6F69430B286A3B6B007A536B /* FetchMoviesUseCase.swift */,
 				6FFDC3F3286A6799002025CA /* MovieDetailsUseCase.swift */,
+				6FFDC3F9286A791F002025CA /* SearchMoviesUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				6FBABF8A2868683F00120AD3 /* EnviromentsManager.swift in Sources */,
 				6FFDC3F4286A6799002025CA /* MovieDetailsUseCase.swift in Sources */,
 				6F694313286A4A70007A536B /* MovieTVCell.swift in Sources */,
+				6FFDC3FA286A791F002025CA /* SearchMoviesUseCase.swift in Sources */,
 				6FBABF44286867A600120AD3 /* BaseNetworkRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

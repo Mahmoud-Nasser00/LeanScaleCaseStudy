@@ -17,6 +17,7 @@ class MovieDetailsVC: UIViewController {
 
     private lazy var favoriteBtn: UIButton = {
         let btn = UIButton()
+        btn.setTitleColor(.systemBlue, for: .normal)
         btn.setTitle("Favorite", for: .normal)
         btn.setTitle("Favorited", for: .selected)
         btn.addTarget(self, action: #selector(favoriteBtnTapped), for: .touchUpInside)
@@ -39,6 +40,7 @@ class MovieDetailsVC: UIViewController {
     // MARK: - UI Functions
 
     private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteBtn)
     }
 
@@ -72,6 +74,13 @@ class MovieDetailsVC: UIViewController {
             }
         }
     }
+
+    private func openUrl(urlString: String) {
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
+    }
+
     /*
     // MARK: - Navigation
 
@@ -83,7 +92,7 @@ class MovieDetailsVC: UIViewController {
     */
 
     // MARK: - Actions
-    @objc func favoriteBtnTapped(){
+    @objc func favoriteBtnTapped() {
         favoriteBtn.isSelected = !favoriteBtn.isSelected
     }
 
@@ -130,8 +139,10 @@ extension MovieDetailsVC: UITableViewDelegate {
         switch detailsItems[indexPath.row] {
         case .description:
             break
-        case .reddit, .website:
-            break
+        case .reddit:
+            openUrl(urlString: movieDetails?.redditUrl ?? "")
+        case .website:
+            openUrl(urlString: movieDetails?.website ?? "")
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
