@@ -24,5 +24,20 @@ class MovieTVCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+    func updateMovieCell(movie: MovieResult) {
+//        movieImage.image = movie.backgroundImage
+        movieTitle.text = movie.name
+        movieMeta.text = String(movie.metacritic)
+        movieGenre.text = getMovieGenres(genres: movie.genres)
+    }
+
+    private func getMovieGenres(genres: [Genre]) -> String {
+        return genres
+            .map {
+                $0.name
+            }
+            .joined(separator: ", ")
+    }
     
 }

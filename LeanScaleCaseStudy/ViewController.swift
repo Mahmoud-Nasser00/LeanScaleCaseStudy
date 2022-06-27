@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var moviesTV: UITableView!
     // MARK: - props
-
+    private var moviesList = [MovieResult]()
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,8 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                print(model)
+                self.moviesList = model?.results ?? []
+                self.moviesTV.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -45,11 +46,12 @@ class ViewController: UIViewController {
 // MARK: - Extensions
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return moviesList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTVCell") as? MovieTVCell {
+            cell.updateMovieCell(movie: moviesList[indexPath.row])
             return cell
         }
         return UITableViewCell()
