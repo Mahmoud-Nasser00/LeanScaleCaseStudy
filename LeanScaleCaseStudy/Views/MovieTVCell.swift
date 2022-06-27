@@ -26,7 +26,7 @@ class MovieTVCell: UITableViewCell {
     }
 
     func updateMovieCell(movie: MovieResult) {
-//        movieImage.image = movie.backgroundImage
+        movieImage.downloadImage(path: movie.backgroundImage)
         movieTitle.text = movie.name
         movieMeta.text = String(movie.metacritic)
         movieGenre.text = getMovieGenres(genres: movie.genres)

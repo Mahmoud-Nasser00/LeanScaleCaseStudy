@@ -9,5 +9,6 @@ target 'LeanScaleCaseStudy' do
     
     pod 'Alamofire'
     pod 'SwiftLint'
+    pod 'SDWebImage'
 
 end
