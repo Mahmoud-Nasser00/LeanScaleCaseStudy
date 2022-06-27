@@ -13,30 +13,30 @@ struct Movie: Codable {
     let next: String
 //    let previous: JSONNull?
     let results: [MovieResult]
-    let seoTitle, seoDescription, seoKeywords, seoH1: String
-    let noindex, nofollow: Bool
-    let welcomeDescription: String
-    let filters: Filters
-    let nofollowCollections: [String]
+//    let seoTitle, seoDescription, seoKeywords, seoH1: String
+//    let noindex, nofollow: Bool
+//    let welcomeDescription: String
+//    let filters: Filters
+//    let nofollowCollections: [String]
 }
 
-struct Filters: Codable {
-    let years: [FiltersYear]
-}
+// struct Filters: Codable {
+//    let years: [FiltersYear]
+// }
 
-struct FiltersYear: Codable {
-    let from, to: Int
-    let filter: String
-    let decade: Int
-    let years: [YearYear]
-    let nofollow: Bool
-    let count: Int
-}
+// struct FiltersYear: Codable {
+//    let from, to: Int
+//    let filter: String
+//    let decade: Int
+//    let years: [YearYear]
+//    let nofollow: Bool
+//    let count: Int
+// }
 
-struct YearYear: Codable {
-    let year, count: Int
-    let nofollow: Bool
-}
+// struct YearYear: Codable {
+//    let year, count: Int
+//    let nofollow: Bool
+// }
 
 // MARK: - Result
 struct MovieResult: Codable {
@@ -49,18 +49,18 @@ struct MovieResult: Codable {
     let ratings: [Rating]
     let ratingsCount, reviewsTextCount, added: Int
     let addedByStatus: AddedByStatus
-    let metacritic, playtime, suggestionsCount: Int
+    let metacritic, playtime, suggestionsCount: Int?
     let updated: String
 //    let userGame: JSONNull?
     let reviewsCount: Int
     let saturatedColor, dominantColor: Color
 //    let platforms: [PlatformElement]
-    let parentPlatforms: [ParentPlatform]
+//    let parentPlatforms: [ParentPlatform]
     let genres: [Genre]
-    let stores: [Store]
+//    let stores: [Store]
 //    let clip: JSONNull?
-    let tags: [Genre]
-    let esrbRating: EsrbRating
+//    let tags: [Genre]
+//    let esrbRating: EsrbRating
     let shortScreenshots: [ShortScreenshot]
 }
 

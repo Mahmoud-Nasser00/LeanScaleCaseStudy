@@ -10,13 +10,17 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var moviesTV: UITableView!
+
     // MARK: - props
     private var moviesList = [MovieResult]()
+    private var totalCount: Int = 0
+    private var currentPage: Int = 1
+
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTV()
-        fetchMovies(page: 1)
+        fetchMovies(page: currentPage)
     }
 
     // MARK: - UI Functions
@@ -33,7 +37,12 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                self.moviesList = model?.results ?? []
+                self.totalCount = model?.count ?? 0
+                if page == 1 {
+                    self.moviesList = model?.results ?? []
+                } else {
+                    self.moviesList.append(contentsOf: model?.results ?? [])
+                }
                 self.moviesTV.reloadData()
             case .failure(let error):
                 print(error)
@@ -61,5 +70,9 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == moviesList.count - 1 && totalCount != moviesList.count {
+            currentPage += 1
+            fetchMovies(page: currentPage)
+        }
     }
 }
