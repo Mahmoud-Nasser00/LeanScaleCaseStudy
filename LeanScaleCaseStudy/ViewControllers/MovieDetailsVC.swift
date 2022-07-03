@@ -5,6 +5,10 @@
 //  Created by Mahmoud Nasser on 27/06/2022.
 //
 
+// MARK: - Doc
+// i choose to make movie details in UIViewController for future updated to be easily managed and reusable
+// best part i worked on is see less and see more in details
+
 import UIKit
 
 class MovieDetailsVC: UIViewController {

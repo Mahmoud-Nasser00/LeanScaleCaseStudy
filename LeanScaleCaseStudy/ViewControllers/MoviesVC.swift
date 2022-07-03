@@ -116,6 +116,7 @@ extension MoviesVC: UITableViewDataSource {
 
 extension MoviesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.animateSwipeAnimation(row: indexPath.row)
         if indexPath.row == moviesList.count - 1 && totalCount != moviesList.count {
             currentPage += 1
             fetchMovies(page: currentPage)

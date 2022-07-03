@@ -41,3 +41,16 @@ extension UILabel {
 
     }
 }
+
+extension UITableViewCell {
+    func animateSwipeAnimation(row: Int) {
+        let delay = -70 * Double(row)
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, delay, 0, 0)
+        layer.transform = rotationTransform
+
+        UIView.animate(withDuration: 1.0) { [weak self] in
+            self?.layer.transform = CATransform3DIdentity
+        }
+    }
+
+}

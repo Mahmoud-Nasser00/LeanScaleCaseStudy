@@ -5,6 +5,9 @@
 //  Created by Mahmoud Nasser on 27/06/2022.
 //
 
+// MARK: - Doc
+// i decided to choose saving favorites in core data service over user defaults or realm as it's more convenient in this case
+
 import UIKit
 
 class FavoritesVC: UIViewController {
