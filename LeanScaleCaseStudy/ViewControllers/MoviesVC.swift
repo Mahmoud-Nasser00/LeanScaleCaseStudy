@@ -27,6 +27,7 @@ class MoviesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavBar()
+        moviesTV.reloadData()
     }
 
     // MARK: - UI Functions
@@ -79,6 +80,7 @@ class MoviesVC: UIViewController {
     private func pushToMovieDetailsVC(movieId id: Int) {
         if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as? MovieDetailsVC {
             detailsVC.movieId = id
+            navigationController?.navigationBar.prefersLargeTitles = false
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
@@ -112,6 +114,7 @@ extension MoviesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieId = moviesList[indexPath.row].id
         pushToMovieDetailsVC(movieId: movieId)
+        moviesList[indexPath.row].isOpened = true
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

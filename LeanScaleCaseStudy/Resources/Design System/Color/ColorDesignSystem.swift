@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 enum AppColors: String {
-    case primary = ""
+    case selectedCell = "#E0E0E0"
     
     var color:UIColor {
         return UIColor(hex: self.rawValue)

@@ -14,4 +14,7 @@ struct MovieDetails: Codable {
     let redditUrl: String
     let descriptionRaw: String
     let backgroundImage: String
+    let genres: [Genre]
+    let metacritic: Int?
+    var isFavorite: Bool?
 }

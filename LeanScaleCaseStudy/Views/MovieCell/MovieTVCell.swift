@@ -25,6 +25,14 @@ class MovieTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func updateFavoriteCell(movie: MovieCD) {
+        movieImage.downloadImage(path: movie.movieImage ?? "")
+        movieTitle.text = movie.movieName
+        movieMeta.text = movie.movieMeta
+        movieGenre.text = movie.movieGenres
+        backgroundColor = (movie.isOpened) ? AppColors.selectedCell.color : .clear
+    }
+
     func updateMovieCell(movie: MovieResult) {
         movieImage.downloadImage(path: movie.backgroundImage)
         movieTitle.text = movie.name

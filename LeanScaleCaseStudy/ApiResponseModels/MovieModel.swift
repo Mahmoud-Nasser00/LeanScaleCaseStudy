@@ -7,46 +7,45 @@
 
 import Foundation
 
-// MARK: - Welcome
-struct Movie: Codable {
+struct MovieResponse: Codable {
     let count: Int
     let next: String
-//    let previous: JSONNull?
     let results: [MovieResult]
-//    let seoTitle, seoDescription, seoKeywords, seoH1: String
-//    let noindex, nofollow: Bool
-//    let welcomeDescription: String
-//    let filters: Filters
-//    let nofollowCollections: [String]
 }
 
-// struct Filters: Codable {
-//    let years: [FiltersYear]
-// }
-
-// struct FiltersYear: Codable {
-//    let from, to: Int
-//    let filter: String
-//    let decade: Int
-//    let years: [YearYear]
-//    let nofollow: Bool
-//    let count: Int
-// }
-
-// struct YearYear: Codable {
-//    let year, count: Int
-//    let nofollow: Bool
-// }
-
-// MARK: - Result
 struct MovieResult: Codable {
     let id: Int
     let name, backgroundImage: String
     let metacritic: Int?
     let genres: [Genre]
+
+    var isOpened: Bool?
+
+    func convertToMovie() -> Movie {
+        let genres = self.genres.map { $0.name }.joined(separator: ", ")
+        let meta = metacritic ?? 0
+        
+        return Movie(id: self.id,
+                     name: self.name,
+                     backgroundImage: self.backgroundImage,
+                     metacritic: meta,
+                     genres: genres,
+                     isOpened: self.isOpened ?? false,
+                     isFavorite: false)
+    }
 }
 
 struct Genre: Codable {
     let id: Int
     let name: String
+}
+
+struct Movie {
+    let id: Int
+    let name, backgroundImage: String
+    let metacritic: Int
+    let genres: String
+
+    var isOpened: Bool
+    var isFavorite: Bool
 }

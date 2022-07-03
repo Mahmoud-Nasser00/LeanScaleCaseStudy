@@ -40,7 +40,8 @@ class MovieDetailsVC: UIViewController {
     // MARK: - UI Functions
 
     private func setupNavBar() {
-        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationController?.navigationBar.prefersLargeTitles = false
+        favoriteBtn.isSelected = movieDetails?.isFavorite ?? false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteBtn)
     }
 
@@ -94,6 +95,22 @@ class MovieDetailsVC: UIViewController {
     // MARK: - Actions
     @objc func favoriteBtnTapped() {
         favoriteBtn.isSelected = !favoriteBtn.isSelected
+        movieDetails?.isFavorite = favoriteBtn.isSelected
+        if favoriteBtn.isSelected {
+            guard let movieDetails = movieDetails else {
+                return
+            }
+
+            let movie = Movie(id: movieDetails.id,
+                              name: movieDetails.name,
+                              backgroundImage: movieDetails.backgroundImage,
+                              metacritic: movieDetails.metacritic ?? 0,
+                              genres: movieDetails.genres.map { $0.name }.joined(separator: ", "),
+                              isOpened: false,
+                              isFavorite: true)
+
+            CoreDataServices.instance.saveMovieToCoraData(movie: movie, completion: nil)
+        }
     }
 
 }

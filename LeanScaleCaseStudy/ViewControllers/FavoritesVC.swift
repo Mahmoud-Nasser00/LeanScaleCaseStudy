@@ -13,7 +13,7 @@ class FavoritesVC: UIViewController {
 
     // MARK: - props
     private let searchController = UISearchController()
-    private var favoritesList = [MovieResult]()
+    private var favoritesList = [MovieCD]()
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -24,6 +24,7 @@ class FavoritesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavBar()
+        fetchFavMovie()
     }
 
     // MARK: - UI Functions
@@ -41,8 +42,16 @@ class FavoritesVC: UIViewController {
         favoritesTV.register(UINib(nibName: "MovieTVCell", bundle: nil), forCellReuseIdentifier: "MovieTVCell")
     }
 
-    private func handleEmptyState(favs: [MovieResult]) {
-        favoritesTV.tableFooterView?.isHidden = favs.isEmpty
+    private func fetchFavMovie() {
+        CoreDataServices.instance.fetchItems { [weak self] movies in
+            self?.favoritesList = movies
+            handleEmptyState(favs: movies)
+            self?.favoritesTV.reloadData()
+        }
+    }
+
+    private func handleEmptyState(favs: [MovieCD]) {
+        favoritesTV.tableFooterView?.isHidden = !favs.isEmpty
     }
 
     // MARK: - Navigation
@@ -63,7 +72,7 @@ extension FavoritesVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTVCell") as? MovieTVCell {
-            cell.updateMovieCell(movie: favoritesList[indexPath.row])
+            cell.updateFavoriteCell(movie: favoritesList[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -77,8 +86,17 @@ extension FavoritesVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieId = favoritesList[indexPath.row].id
-        pushToMovieDetailsVC(movieId: movieId)
+        pushToMovieDetailsVC(movieId: Int(movieId))
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            CoreDataServices.instance.removeItemFromCoreData(atRow: indexPath.row, arrayOfData: favoritesList)
+            favoritesList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            handleEmptyState(favs: favoritesList)
+        }
     }
 }
 
