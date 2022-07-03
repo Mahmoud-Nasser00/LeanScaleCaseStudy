@@ -21,3 +21,23 @@ extension UIImageView {
         }
     }
 }
+
+extension UILabel {
+    func seeMoreLessText(isLess: Bool, text: String) {
+        let seeMoreOrLess = isLess ? "...see more": "   see less"
+        var allString = text as NSString
+        if allString.length >= 150 {
+            if isLess {
+                allString = allString.substring(with: NSRange(location: 0, length: allString.length > 150 ? 150 : allString.length)) as NSString
+            }
+            let handledAllString = allString as String + seeMoreOrLess as NSString
+            let finalHandledAllString = NSMutableAttributedString(string: handledAllString as String)
+            let rangeSeeMoreHandled = handledAllString.range(of: seeMoreOrLess, options: .regularExpression, range: NSMakeRange(0, handledAllString.length))
+            if rangeSeeMoreHandled.length > 0 {
+                finalHandledAllString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.blue, range: rangeSeeMoreHandled)
+            }
+            self.attributedText = finalHandledAllString
+        }
+
+    }
+}

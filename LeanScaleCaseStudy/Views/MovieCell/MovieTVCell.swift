@@ -30,7 +30,6 @@ class MovieTVCell: UITableViewCell {
         movieTitle.text = movie.movieName
         movieMeta.text = movie.movieMeta
         movieGenre.text = movie.movieGenres
-        backgroundColor = (movie.isOpened) ? AppColors.selectedCell.color : .clear
     }
 
     func updateMovieCell(movie: MovieResult) {
@@ -38,6 +37,7 @@ class MovieTVCell: UITableViewCell {
         movieTitle.text = movie.name
         movieMeta.text = String(movie.metacritic ?? 0)
         movieGenre.text = getMovieGenres(genres: movie.genres)
+        backgroundColor = (movie.isOpened ?? false) ? AppColors.selectedCell.color : .clear
     }
 
     private func getMovieGenres(genres: [Genre]) -> String {

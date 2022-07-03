@@ -40,7 +40,6 @@ class MovieDetailsVC: UIViewController {
     // MARK: - UI Functions
 
     private func setupNavBar() {
-//        navigationController?.navigationBar.prefersLargeTitles = false
         favoriteBtn.isSelected = movieDetails?.isFavorite ?? false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteBtn)
     }
@@ -125,7 +124,12 @@ extension MovieDetailsVC: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDescCell") as? MovieDescCell {
-                cell.updateDesc(desc: movieDetails?.description ?? "")
+                cell.selectionDelegate = self
+                // InCase of html
+//                cell.updateDesc(desc: movieDetails?.description ?? "")
+
+                // in case if raw string
+                cell.updateDesc(desc: movieDetails?.descriptionRaw ?? "")
                 return cell
             }
         case 1, 2:
@@ -143,26 +147,19 @@ extension MovieDetailsVC: UITableViewDataSource {
 }
 
 extension MovieDetailsVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch detailsItems[indexPath.row] {
-        case .description:
-            return 142
-        case .website, .reddit:
-            return 54
-        }
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch detailsItems[indexPath.row] {
         case .description:
-            break
+            if let cell = tableView.cellForRow(at: indexPath) as? MovieDescCell {
+                cell.isMore = !cell.isMore
+            }
         case .reddit:
             openUrl(urlString: movieDetails?.redditUrl ?? "")
+            tableView.deselectRow(at: indexPath, animated: true)
         case .website:
             openUrl(urlString: movieDetails?.website ?? "")
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
@@ -171,4 +168,12 @@ enum DetailsItems: String, CaseIterable {
     case description
     case reddit = "Visit Reddit"
     case website = "Visit Website"
+}
+
+extension MovieDetailsVC: CellSelectionDelegate {
+    func cellSelected(isSelected: Bool, cell: UITableViewCell) {
+        movieDetailsTV.beginUpdates()
+        (cell as? MovieDescCell)?.movieDescLbl.seeMoreLessText(isLess: isSelected, text: movieDetails?.descriptionRaw ?? "")
+        movieDetailsTV.endUpdates()
+    }
 }

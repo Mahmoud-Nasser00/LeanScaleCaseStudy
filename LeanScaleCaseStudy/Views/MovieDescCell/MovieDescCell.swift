@@ -7,23 +7,34 @@
 
 import UIKit
 
+protocol CellSelectionDelegate: AnyObject {
+    func cellSelected(isSelected: Bool, cell: UITableViewCell)
+}
+
 class MovieDescCell: UITableViewCell {
 
-    @IBOutlet weak var movieDesc: UILabel!
+    @IBOutlet weak var movieDescLbl: UILabel!
+
+    var isMore: Bool = true
+    weak var selectionDelegate: CellSelectionDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        movieDescLbl.numberOfLines = 0
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        selectionDelegate?.cellSelected(isSelected: isMore, cell: self)
     }
 
     func updateDesc(desc: String) {
-        movieDesc.attributedText = desc.htmlToAttributedString
+        movieDescLbl.seeMoreLessText(isLess: isMore, text: desc)
+
+        // in case of html string
+        // movieDescLbl.attributedText = attributedText
     }
     
 }
