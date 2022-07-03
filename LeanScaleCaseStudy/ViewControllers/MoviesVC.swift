@@ -13,6 +13,7 @@ class MoviesVC: UIViewController {
 
     // MARK: - props
     private let searchController = UISearchController()
+    private let refreshControl = UIRefreshControl()
     private var moviesList = [MovieResult]()
     private var totalCount: Int = 0
     private var currentPage: Int = 1
@@ -42,11 +43,15 @@ class MoviesVC: UIViewController {
         moviesTV.delegate = self
         moviesTV.dataSource = self
 
+        moviesTV.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
+
         moviesTV.register(UINib(nibName: "MovieTVCell", bundle: nil), forCellReuseIdentifier: "MovieTVCell")
     }
 
     // MARK: - Functions
     private func fetchMovies(page: Int) {
+        if refreshControl.isRefreshing { refreshControl.endRefreshing() }
         FetchMoviesApi.shared.fetchMovies(page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -57,6 +62,7 @@ class MoviesVC: UIViewController {
                 } else {
                     self.moviesList.append(contentsOf: model?.results ?? [])
                 }
+                self.refreshControl.endRefreshing()
                 self.moviesTV.reloadData()
             case .failure(let error):
                 print(error)
@@ -83,6 +89,11 @@ class MoviesVC: UIViewController {
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationController?.pushViewController(detailsVC, animated: true)
         }
+    }
+
+    // MARK: - ACTIONS
+    @objc func refreshPulled() {
+        fetchMovies(page: 1)
     }
 
 }
